@@ -21,7 +21,6 @@ const {
   query,
   results,
   loading,
-  error,
   showDropdown,
   searchHistory,
   locatingUser,
@@ -31,7 +30,6 @@ const {
   onInput,
   selectCity,
   useCurrentLocation,
-  clearSearch,
   openDropdown,
   closeDropdown
 } = useSearch()
