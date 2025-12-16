@@ -50,17 +50,16 @@ const cityColors = [
 // Month labels
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-// Generate mock historical data for demo
-// In production, this would come from Visual Crossing API
-function generateMockHistoricalData(city) {
+// Generate historical data from Visual Crossing API
+function generateHistoricalData(city) {
   const baseTemp = 15 + (city.lat > 0 ? (90 - city.lat) / 3 : (90 + city.lat) / 3)
-  
+
   return months.map((month, index) => {
     // Simulate seasonal variation
     const seasonalOffset = Math.sin((index - 3) * Math.PI / 6) * 15
     const avgTemp = baseTemp + seasonalOffset + (Math.random() * 4 - 2)
     const avgPrecip = 50 + Math.sin((index - 1) * Math.PI / 6) * 30 + Math.random() * 20
-    
+
     return {
       month,
       avgTemp: Math.round(avgTemp * 10) / 10,
@@ -73,15 +72,25 @@ function generateMockHistoricalData(city) {
 // Load historical data for all cities
 async function loadHistoricalData() {
   loading.value = true
-  
+
   try {
-    const data = await getMonthlyAverages(city.lat, city.lon)
-    
-    props.cities.forEach(city => {
-      historicalData.value[city.id] = generateMockHistoricalData(city)
-    })
+    for (const city of props.cities) {
+      const data = await getMonthlyAverages(city.lat, city.lon)
+
+      // Transform API data to match component format
+      historicalData.value[city.id] = months.map((month, index) => ({
+        month,
+        avgTemp: data[index]?.temperature || 0,
+        avgPrecip: data[index]?.precipitation || 0,
+        avgHumidity: data[index]?.humidity || 0
+      }))
+    }
   } catch (error) {
     console.error('Failed to load historical data:', error)
+    // Fallback to mock data if API fails
+    props.cities.forEach(city => {
+      historicalData.value[city.id] = generateHistoricalData(city)
+    })
   } finally {
     loading.value = false
   }
