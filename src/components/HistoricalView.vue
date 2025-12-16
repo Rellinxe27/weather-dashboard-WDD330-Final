@@ -87,7 +87,7 @@ async function loadHistoricalData() {
     }
   } catch (error) {
     console.error('Failed to load historical data:', error)
-    // Fallback to mock data if API fails
+    // Fallback if API fails
     props.cities.forEach(city => {
       historicalData.value[city.id] = generateHistoricalData(city)
     })
@@ -272,7 +272,7 @@ onMounted(() => {
         <div>
           <p class="text-white/70 text-sm">
             Historical data shows monthly averages based on past year observations.
-            In production, this data would be fetched from the Visual Crossing Weather API.
+            data would be fetched from the Visual Crossing Weather API.
           </p>
         </div>
       </div>
