@@ -272,7 +272,7 @@ onMounted(() => {
         <div>
           <p class="text-white/70 text-sm">
             Historical data shows monthly averages based on past year observations.
-            data would be fetched from the Visual Crossing Weather API.
+            Data would be fetched from the Visual Crossing Weather API.
           </p>
         </div>
       </div>

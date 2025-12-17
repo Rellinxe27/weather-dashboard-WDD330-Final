@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useWeather } from '@/composables/useWeather'
-import { formatTemperature, formatHumidity, formatWind, formatDate, getRelativeTime, getWeatherIcon, getTemperatureColor } from '@/utils/helpers'
+import { formatHumidity, formatWind, formatDate, getWeatherIcon, getTemperatureColor } from '@/utils/helpers'
 
 const props = defineProps({
   city: {
@@ -22,14 +22,11 @@ const {
   alerts,
   loading,
   error,
-  lastUpdated,
   currentTemp,
-  feelsLike,
   tempHigh,
   tempLow,
   dailyForecast,
   hasAlerts,
-  fetchWeatherData,
   setUnit,
   refresh
 } = useWeather(props.city)
