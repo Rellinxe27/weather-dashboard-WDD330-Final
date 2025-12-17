@@ -1,4 +1,4 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { getCurrentWeather, getForecast, getWeatherAlerts } from '@/utils/weatherApi'
 import { getPreferences } from '@/utils/storage'
 import { convertTemperature, processForecastData } from '@/utils/helpers'

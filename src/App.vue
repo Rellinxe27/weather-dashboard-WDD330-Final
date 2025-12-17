@@ -194,16 +194,7 @@ onMounted(() => {
                 <i class="fa-solid fa-clock-rotate-left mr-2"></i>
                 History
               </button>
-              <button 
-                v-if="hasCities"
-                class="px-6 py-3 rounded-xl font-display font-medium text-white transition-all bg-sky-primary/20 border border-sky-primary/30 hover:bg-sky-primary/30"
-                :disabled="isExporting"
-                @click="exportDashboard"
-              >
-                <i v-if="isExporting" class="fa-solid fa-spinner fa-spin mr-2"></i>
-                <i v-else class="fa-solid fa-download mr-2"></i>
-                Export
-              </button>
+
             </div>
           </div>
         </Transition>
